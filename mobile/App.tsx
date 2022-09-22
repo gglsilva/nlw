@@ -8,7 +8,7 @@ import { useFonts,
 
 
 import { Background } from './src/components/Background';
-import { Home } from './src/screens/Home';
+import { Router } from './src/router';
 import { Loading } from './src/components/Loading';
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
         translucent
       />
 
-      { fontsLoaded ? <Home />: <Loading />}      
+      { fontsLoaded ? <Router />: <Loading />}      
     </Background>
   );
 }
