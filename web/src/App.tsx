@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import * as Dialog from '@radix-ui/react-dialog';
 import { CreateAdBanner } from "./components/CreateAdBanner";
-
 import { GameBanner } from "./components/GameBanner";
 
 import './styles/main.css';
 
 import logoImg from './assets/Logo.svg';
 import { CreateAdModal } from "./components/CreateAdModal";
-
+import axios from "axios";
 
 
 interface Game {
@@ -24,16 +23,14 @@ function App() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3333/games')
-      .then(response => response.json())
-      .then(data => {
-        setGames(data);
-      });
+    axios('http://localhost:3333/games').then(response => {
+      setGames(response.data);
+    });
   }, []);
 
   return (
-    <div className="max-w-[990px] mx-auto flex flex-col items-center my-20">
-      <img src={logoImg} alt="" width={350} height={350}/>
+    <div className="max-w-[1344px] mx-auto flex flex-col items-center my-20">
+      <img src={logoImg} alt="" width={250}  height={250}/>
 
       <h1 className="text-6xl text-white font-black mt-20">
         Seu <span className="text-transparent bg-nlw-gradient bg-clip-text">duo</span> está aqui.
@@ -54,9 +51,8 @@ function App() {
 
       <Dialog.Root>
         <CreateAdBanner />
-          <CreateAdModal />
 
-        
+        <CreateAdModal />
       </Dialog.Root>
     </div>
   )
